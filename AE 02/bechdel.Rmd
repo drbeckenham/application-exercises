@@ -1,7 +1,7 @@
 ---
 title: "AE 02 - Bechdel Test"
-author: "Your Name"
-date: "`r Sys.Date()`"
+author: "Susan Beckenham"
+date: "`2/19/2026`"
 output: 
   pdf_document:
     toc: true

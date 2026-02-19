@@ -2,15 +2,14 @@
 title: "AE 01 - UN Votes"
 author: "Susan Beckenham"
 date: "02/18/2026"
-
 output: 
-  pdf_document:
-    toc: true
-    latex_engine: xelatex
   html_document:
     toc: true
     toc_float: true
     code_folding: show
+  pdf_document:
+    toc: true
+    latex_engine: xelatex
 ---
 
 ## Introduction
@@ -160,7 +159,7 @@ unvotes %>%
   nrow()
 ```
 
-**Answer:** There are _____ countries in the dataset.
+**Answer:** There are 200 countries in the dataset.
 
 **Task 1.2:** What are the unique vote options?
 ```{r unique-votes}
@@ -169,7 +168,7 @@ unvotes %>%
   distinct(vote)
 ```
 
-**Answer:** The vote options are: ___, ___, and ___.
+**Answer:** The vote options are: no, yes, and abstain.
 
 **Task 1.3:** What issue categories are included?
 ```{r unique-issues}
@@ -178,7 +177,7 @@ unvotes %>%
   distinct(issue)
 ```
 
-**Answer:** The issue categories are: ___________________________________________
+**Answer:** The issue categories are: Human rights, Economic Development, Colonialism, Palestinian conflict, Arms contrl and disarmament, Nuclear weapns and nuclear material
 
 ---
 
@@ -239,23 +238,21 @@ unvotes %>%
 
 **Your answer:**
 
-___________________________________________________________________________
-___________________________________________________________________________
+The United Kingdom has a very "mid" voting pattern. They have a fairly stable voting pattern or 25% Yes votes, with an increase taking place between 2000 and around 2018 to 50%.They then begin to show a decrease around 2020, dropping fairly rapidly below 50%. 
 
 **Task 2.2:** Which country appears most consistent in its voting patterns across all issues? Which appears least consistent?
 
 **Your answer:**
 
-___________________________________________________________________________
-___________________________________________________________________________
+The UK seems to be the most consistent voting pattern, with the exception of votes for the Palestinian conflict. The most inconsistent country would be a toss up between the US and Turkey. Because of the wild swings, I would say Turkey is the most inconsistent. 
 
 **Task 2.3:** On which issue do the three countries show the most similar voting patterns? On which issue do they differ the most?
 
 **Your answer:**
 
-Most similar: _____________________________________________________________
+Most similar: They have very similar patterns when it comes to Nuclear weapons.
 
-Most different: ___________________________________________________________
+Most different: They are most different when it comes to the Palestine conflict.
 
 ---
 
@@ -269,7 +266,7 @@ We can easily change which countries are being plotted by changing which countri
 ```{r plot-custom-countries, message=FALSE, fig.width=10, fig.height=6, eval = FALSE}
 # Copy the code from above and modify the filter() line
 unvotes %>%
-  filter(country %in% c("___", "___", "___")) %>%  # Change these!
+  filter(country %in% c("United States", "Nigeria", "Mexico")) %>%  # Change these!
   mutate(year = year(date)) %>%
   group_by(country, year, issue) %>%
   summarize(percent_yes = mean(vote == "yes")) %>%
@@ -287,14 +284,13 @@ unvotes %>%
   )
 ```
 
-**Which countries did you choose?** _____, _____, and _____
+**Which countries did you choose?** United States, Nigeria, and Mexico
 
 **Task 3.2:** Describe one interesting pattern you notice in your new plot.
 
 **Your answer:**
 
-___________________________________________________________________________
-___________________________________________________________________________
+For the most part, Mexico and Nigeria had similar patterns and values in their votes, while the US was consistently lower in their voting yes. In fact, the US often voted very differently and "anti" to how Nigeria and Mexico voted.
 
 ---
 
@@ -305,8 +301,8 @@ ___________________________________________________________________________
 **Hint:** You'll need to add a `filter()` step for the issue, and modify the countries in the first `filter()`.
 ```{r plot-human-rights, message=FALSE, fig.width=10, fig.height=6, eval = FALSE}
 unvotes %>%
-  filter(country %in% c("___", "___", "___", "___", "___")) %>%  # Choose 5 countries
-  filter(issue == "___") %>%  # Filter for Human rights
+  filter(country %in% c("United Kingdom", "Australia", "South Korea", "Austria", "Italy")) %>%  # Choose 5 countries
+  filter(issue == "Human rights") %>%  # Filter for Human rights
   mutate(year = year(date)) %>%
   group_by(country, year) %>%
   summarize(percent_yes = mean(vote == "yes")) %>%
@@ -325,8 +321,7 @@ unvotes %>%
 
 **Describe what you see:**
 
-___________________________________________________________________________
-___________________________________________________________________________
+It is interesting that Italy, Australia, the United Kingdom, and Austria all have similar voting patterns. Both Ital and South Korea seem to have entered the game late, with data only being collected from South Korea around the 1990s and Italy around the late 1950s. Once firmly embedded in the UN, both countries fell into line with the others, ad have similar voting patterns.
 
 ---
 
@@ -335,25 +330,25 @@ ___________________________________________________________________________
 **Task 5.1:** Calculate the overall percentage of "yes" votes for each country across all issues and all years.
 ```{r overall-yes-percent, eval = FALSE}
 country_yes_percent <- unvotes %>%
-  group_by(___) %>%
+  group_by(country) %>%
   summarize(
     total_votes = n(),
-    percent_yes = mean(vote == "___") * 100
+    percent_yes = mean(vote == "yes") * 100
   ) %>%
   arrange(desc(percent_yes))
 
 # View the top 10
-head(country_yes_percent, 10)
+head(country_yes_percent, 200)
 ```
 
-**Which country has the highest overall percentage of "yes" votes?** _____
+**Which country has the highest overall percentage of "yes" votes?** Seychelles
 
-**Which has the lowest?** _____
+**Which has the lowest?** Zanzibar
 
 **Task 5.2:** Calculate the percentage of "yes" votes by issue, averaged across all countries and all years.
 ```{r issue-yes-percent, eval = FALSE}
 issue_yes_percent <- unvotes %>%
-  group_by(___) %>%
+  group_by(issue) %>%
   summarize(
     percent_yes = mean(vote == "yes") * 100
   ) %>%
@@ -362,9 +357,9 @@ issue_yes_percent <- unvotes %>%
 issue_yes_percent
 ```
 
-**Which issue has the most "yes" votes on average?** _____________________
+**Which issue has the most "yes" votes on average?** Palestinian conflict
 
-**Which has the least?** ____________________
+**Which has the least?** Human rights
 
 ---
 
