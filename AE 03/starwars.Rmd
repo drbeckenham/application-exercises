@@ -1,16 +1,16 @@
 ---
 title: "AE 03 - Visualizing Star Wars Characters"
-author: "Your Name"
+author: "Susan Beckenham"
 date: "`r Sys.Date()`"
 output: 
-  html_document:
-    toc: true
-    toc_float: true
-    code_folding: show
   pdf_document:
     toc: true
     latex_engine: xelatex
     keep_tex: false
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: show
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
@@ -74,25 +74,25 @@ glimpse(starwars)
 
 **Answer the following questions:**
 
-**How many observations (rows) are there?** _____
+**How many observations (rows) are there?** There are 87 Rows.
 
-**How many variables (columns) are there?** _____
+**How many variables (columns) are there?** There are 14 columns
 
 **Name three numerical variables:**
 
-1. _____
-2. _____
-3. _____
+1. Height
+2. birth-year
+3. mass
 
 **Name three categorical variables:**
 
-1. _____
-2. _____
-3. _____
+1. hair_color
+2. name
+3. starships
 
 **What does each observation represent?**
 
-___________________________________________________________________________
+Each observation represents everythng about a specific character from Star Wars.
 
 ---
 
@@ -111,8 +111,7 @@ ggplot(starwars,
 
 **Your answer:**
 
-___________________________________________________________________________
-___________________________________________________________________________
+Since color was assigned the value of gender, and then re assigned the value of "pink", all data points became pink.
 
 **Task 2.2:** Why did this happen?
 
@@ -120,7 +119,7 @@ ___________________________________________________________________________
 
 **Your answer:**
 
-___________________________________________________________________________
+Again, the value for color, which was assigned as gender, changed to pink at the reassignment. Therefore, everthing became pink.
 ___________________________________________________________________________
 
 **The issue:** When you set `color = "pink"` inside `geom_point()`, it overrides the aesthetic mapping `color = gender` from `aes()`.
@@ -149,10 +148,10 @@ ggplot(starwars,
        aes(x = height, y = mass, color = gender, size = birth_year)) +
   geom_point(color = "#30509C") +
   labs(
-    title = "___",           # Title about relationship between height and mass
-    x = "___",               # What is on the x-axis?
-    y = "___",               # What is on the y-axis?
-    size = "___"             # What does size represent?
+    title = "Star Wars Characters categorized by Height and Mass",     
+    x = "height",               
+    y = "mass",              
+    size = "birth year"            
   )
 ```
 
@@ -162,12 +161,11 @@ ggplot(starwars,
 - x and y labels should include units if relevant (height in cm, mass in kg)
 - size label describes what the size of points represents
 
-**Task 3.1:** Why is there no `color` label in the `labs()` function?
+**Task 3.1:** Why is there no `color` label in the `labs()` function? The color is aid out globally before the labs() fuction is declared.
 
 **Your answer:**
 
-___________________________________________________________________________
-
+Color is defined before the labs() function with "geom_point(color = "#30509C")"
 ---
 
 ## Exercise 4: Create a Histogram
@@ -188,12 +186,12 @@ starwars %>%
 **Now create your histogram:**
 ```{r histogram, eval = FALSE}
 # Fill in the blanks
-ggplot(starwars, aes(x = ___)) +
-  geom_histogram(binwidth = ___, fill = "steelblue", color = "white") +
+ggplot(starwars, aes(x = height)) +
+  geom_histogram(binwidth = 50, fill = "steelblue", color = "white") +
   labs(
-    title = "___",
-    x = "___",
-    y = "___"
+    title = "Heights of Star Wars Characters",
+    x = "max height",
+    y = "min height"
   )
 ```
 
@@ -207,15 +205,13 @@ ggplot(starwars, aes(x = ___)) +
 
 **Your answer:**
 
-I chose a binwidth of _____ because ______________________________________
-___________________________________________________________________________
+I chose a binwidth of 50 because it seems to allow for a nice distribution.  A higher number could have caused too little information, as a smaller nmber could have been too much.
 
 **Task 4.2:** Describe the distribution. Is it symmetric, skewed left, or skewed right? Are there any outliers?
 
 **Your answer:**
 
-___________________________________________________________________________
-___________________________________________________________________________
+_The distribution is left-skewed as the tail is to the left. 
 
 ---
 
@@ -236,12 +232,12 @@ Pick a numerical variable and a categorical variable and make a visualization to
 - birth_year by sex
 ```{r num-cat, eval = FALSE}
 # Your code here
-ggplot(starwars, aes(x = ___, y = ___)) +
+ggplot(starwars, aes(x = hair_color, y = eye_color)) +
   geom_boxplot(fill = "lightblue") +
   labs(
-    title = "___",
-    x = "___",
-    y = "___"
+    title = "hair_color as opposed to eye_color",
+    x = "hair_color",
+    y = "eye_color"
   )
 ```
 
@@ -249,9 +245,7 @@ ggplot(starwars, aes(x = ___, y = ___)) +
 
 What does this visualization tell you about the relationship between these two variables?
 
-___________________________________________________________________________
-___________________________________________________________________________
-___________________________________________________________________________
+This shows the same skewness as the previous plot, There are a large amount folks liked with yellow eys, but perhaos more with blue eyes. The hair color is all over the place, but more between which and grey or none.
 
 ---
 
@@ -268,28 +262,28 @@ Pick a single categorical variable from the dataset and make a bar plot of its d
 - hair_color
 ```{r barplot,, eval = FALSE}
 # Your code here
-ggplot(starwars, aes(x = ___)) +
+ggplot(starwars, aes(x = gender)) +
   geom_bar(fill = "coral") +
   labs(
-    title = "___",
-    x = "___",
-    y = "___"
+    title = "Gender",
+    x = "Gender",
+    y = "Count"
   )
 ```
 
 **Task 6.1:** Which category has the most observations?
 
-**Your answer:** _____
+**Your answer:** The masculine categoty has the most observations.
 
 **Task 6.2:** If your plot has many categories with small bars that are hard to read, try flipping the coordinates:
 ```{r barplot-flipped, eval = FALSE}
 # Same code as above, but add coord_flip() at the end
-ggplot(starwars, aes(x = ___)) +
+ggplot(starwars, aes(x = gender)) +
   geom_bar(fill = "coral") +
   labs(
-    title = "___",
-    x = "___",
-    y = "___"
+    title = "gender",
+    x = "count",
+    y = "gender"
   ) +
   coord_flip()
 ```
@@ -316,26 +310,26 @@ Pick two categorical variables and make a visualization to visualize the relatio
 **Option 1: Stacked bar plot**
 ```{r cat-cat-stacked, eval = FALSE}
 # Your code here
-ggplot(starwars, aes(x = ___, fill = ___)) +
+ggplot(starwars, aes(x = sex, fill = species)) +
   geom_bar() +
   labs(
-    title = "___",
-    x = "___",
+    title = "Star Wars Sex Count",
+    x = "Sex",
     y = "Count",
-    fill = "___"
+    fill = "Species"
   )
 ```
 
 **Option 2: Grouped bar plot (side-by-side)**
 ```{r cat-cat-grouped, eval = FALSE}
 # Your code here
-ggplot(starwars, aes(x = ___, fill = ___)) +
+ggplot(starwars, aes(x = sex, fill = species)) +
   geom_bar(position = "dodge") +
   labs(
-    title = "___",
-    x = "___",
+    title = "Grouped Bar plot",
+    x = "Sex",
     y = "Count",
-    fill = "___"
+    fill = "Species"
   )
 ```
 
@@ -343,9 +337,7 @@ ggplot(starwars, aes(x = ___, fill = ___)) +
 
 What does this visualization tell you about the relationship between these two variables?
 
-___________________________________________________________________________
-___________________________________________________________________________
-___________________________________________________________________________
+In both instances, there are a lote more male characters than any other type. This seems to be across most of thes that are of a green color.
 
 ---
 
@@ -371,18 +363,18 @@ Pick two numerical variables and two categorical variables and make a visualizat
 ```{r multi, eval=FALSE}
 # You might want to filter first to avoid too many facets
 starwars_filtered <- starwars %>%
-  filter(species %in% c("Human", "Droid", "___"))  # Pick 3-4 species
+  filter(species %in% c("Human", "Droid", "Ewok"))  # Pick 3-4 species
 
 # Your plot here
 ggplot(starwars_filtered, 
-       aes(x = ___, y = ___, color = ___)) +
+       aes(x = height, y = mass, color = species)) +
   geom_point(size = 3) +
-  facet_wrap(~ ___) +
+  facet_wrap(~ homeworld) +
   labs(
-    title = "___",
-    x = "___",
-    y = "___",
-    color = "___"
+    title = "Heights and masses of species and their home worlds ",
+    x = "height",
+    y = "mass",
+    color = "species"
   )
 ```
 
@@ -390,10 +382,7 @@ ggplot(starwars_filtered,
 
 What patterns do you notice? How do the relationships differ across the facets?
 
-___________________________________________________________________________
-___________________________________________________________________________
-___________________________________________________________________________
-___________________________________________________________________________
+I notice that most places have taller, heavier characters. There are more listed on Tatooine. There are very few droids, and the only place to find the small Ewoks is in Endor,
 
 ---
 
@@ -403,21 +392,22 @@ ___________________________________________________________________________
 
 **Your answer:**
 
-___________________________________________________________________________
-___________________________________________________________________________
+For me, the Star Wars Sex Count, which was a bar chart, was the easiest to visually evaluate. It was clear, although the vast amount of colors was a little disconcerting.
 
 **Task 9.2:** What was the most interesting pattern or relationship you found?
 
 **Your answer:**
 
 ___________________________________________________________________________
-___________________________________________________________________________
+I liked the fact that in the height vs mass lot, it was clear that mos tof the humans could very clearly be fund. tatooine.
 
 **Task 9.3:** What did you find most challenging about creating these visualizations?
 
+
+
 **Your answer:**
 
-___________________________________________________________________________
+Nothing really. I am just getting used to the code. As I have done a lot with stats, this programming is very interesting. I have been using SPSS._
 
 ---
 
