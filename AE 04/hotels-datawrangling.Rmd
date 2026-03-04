@@ -227,7 +227,7 @@ hotels %>%
 
 **Your answer:**
 
-I am surprised at the solo travellers. It is the second highest, and this is a big surprise. The overall bookings number do make sense, with most people travelling with a companion, and there being smaller ammounts of bookings for larger groups.
+I am surprised at the solo travellers. It is the second highest, and this is a big surprise. The overall bookings number do make sense, with most people travelling with a companion, and there being smaller ammounts of bookings for larger groups.It is wierd that there are a bunch of bokings with 0 adults. I would guess these are erroneous
 
 **Hint:** Look at the minimum and maximum values. Do they make sense for hotel bookings?
 
@@ -238,28 +238,27 @@ I am surprised at the solo travellers. It is the second highest, and this is a b
 Repeat Exercise 5, once for canceled bookings (`is_canceled` coded as 1) and once for not canceled bookings (`is_canceled` coded as 0). What does this reveal about the surprising results you spotted in the previous exercise?
 
 **Task 6.1:** Frequency table for CANCELED bookings.
-```{r canceled-adults, eval = FALSE}
+```{r canceled-adults, eval = TRUE}
 # Filter for canceled bookings, then count adults
 hotels %>%
-  filter(is_canceled == ___) %>%
-  count(___, sort = TRUE)
+  filter(is_canceled == 1) %>%
+  count(adults, sort = TRUE)
 ```
 
 **Task 6.2:** Frequency table for NOT CANCELED bookings.
-```{r not-canceled-adults, eval = FALSE}
+```{r not-canceled-adults, eval = TRUE}
 # Filter for not canceled bookings, then count adults
 hotels %>%
-  filter(is_canceled == ___) %>%
-  count(___, sort = TRUE)
+  filter(is_canceled == 0) %>%
+  count(adults, sort = TRUE)
 ```
 
 **Task 6.3:** What does this reveal about the surprising results from Exercise 5?
 
 **Your answer:**
 
-The unusual values (like 0 adults) appear more frequently in _____________ bookings. This suggests that _____________________________________________
-___________________________________________________________________________
-___________________________________________________________________________
+The unusual values (like 0 adults) appear more frequently in not cancelled bookings. This suggests that the bookings with 0 adults is centered around cancelled bookings. Therefore, they were probably made in error, or had some other erroneous data attached.
+
 
 ---
 
