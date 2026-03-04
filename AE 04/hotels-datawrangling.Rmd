@@ -206,11 +206,11 @@ It appears that the city hotels have more family bookings, which was a big surpr
 Create a frequency table of the number of `adults` in a booking. Display the results in descending order so the most common observation is on top. 
 
 **What is the most common number of adults in bookings in this dataset? Are there any surprising results?**
-```{r adults-frequency, eval = FALSE}
+```{r adults-frequency, eval = TRUE}
 # Create frequency table
 hotels %>%
-  count(___, sort = ___) %>%    # Count adults, sort in descending order
-  arrange(desc(___))             # Arrange by count (n) in descending order
+  count(adults, sort = TRUE) %>%    # Count adults, sort in descending order
+  arrange(desc(n))             # Arrange by count (n) in descending order
 ```
 
 **Hints:**
@@ -221,14 +221,13 @@ hotels %>%
 
 **Task 5.1:** What is the most common number of adults?
 
-**Your answer:** _____ adults
+**Your answer:** 2 adults
 
 **Task 5.2:** What surprising result(s) do you see?
 
 **Your answer:**
 
-___________________________________________________________________________
-___________________________________________________________________________
+I am surprised at the solo travellers. It is the second highest, and this is a big surprise. The overall bookings number do make sense, with most people travelling with a companion, and there being smaller ammounts of bookings for larger groups.
 
 **Hint:** Look at the minimum and maximum values. Do they make sense for hotel bookings?
 
