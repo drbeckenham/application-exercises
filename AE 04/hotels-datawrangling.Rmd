@@ -265,14 +265,14 @@ The unusual values (like 0 adults) appear more frequently in not cancelled booki
 ## Exercise 7: Group Summary Statistics
 
 Calculate minimum, mean, median, and maximum average daily rate (`adr`) grouped by `hotel` type so that you can get these statistics separately for resort and city hotels. Which type of hotel is higher, on average?
-```{r hotel-adr-summary, eval = FALSE}
+```{r hotel-adr-summary, eval = TRUE}
 hotels %>%
-  group_by(___) %>%
+  group_by(hotel) %>%
   summarise(
-    min_adr = min(___),
-    mean_adr = mean(___),
-    median_adr = median(___),
-    max_adr = max(___)
+    min_adr = min(adr),
+    mean_adr = mean(adr),
+    median_adr = median(adr),
+    max_adr = max(adr)
   )
 ```
 
@@ -286,27 +286,26 @@ hotels %>%
 
 | Statistic | Resort Hotel | City Hotel |
 |:----------|:-------------|:-----------|
-| Minimum   |              |            |
-| Mean      |              |            |
-| Median    |              |            |
-| Maximum   |              |            |
+| Minimum   |-6.38         |0.00        |
+| Mean      |94.95293      |105.30447   |
+| Median    |75.0          |99.9        |
+| Maximum   |508           |5400        |
 
 **Task 7.2:** Which type of hotel has a higher average daily rate?
 
 **Your answer:**
 
-___________________________________________________________________________
 
+The city hotel has the highest average rate, with the median of 99.9 as opposed to the resort hotel with 75.0.
 **Task 7.3:** What unusual values do you notice in the summary statistics?
 
 **Your answer:**
 
-___________________________________________________________________________
-___________________________________________________________________________
+I found that the minimum for the resort being a negative number very unusual. I think there must be some error in the data that has caused it. This would throw off all the numbers possibly.
 
 **Hint:** Look at the minimum and maximum values. Are they realistic?
 
----
+I don't think they are realistic. There is too much variance. I think the data has issues.
 
 ## Exercise 8: Investigate Unusual Observations
 
@@ -315,69 +314,66 @@ We observe two unusual values in the summary statistics above -- a negative mini
 **Hint:** For example, you can `filter` for the given `adr` amounts and `select` the relevant columns.
 
 **Task 8.1:** Investigate the negative ADR value.
-```{r negative-adr, eval = FALSE}
+```{r negative-adr, eval = TRUE}
 # Filter for negative adr and select relevant columns
 hotels %>%
-  filter(adr ___ ___) %>%                           # adr less than 0
+  filter(adr < 0) %>%                           # adr less than 0
   select(hotel, adr, arrival_date_year, 
          arrival_date_month, adults, children, babies)
 ```
 
 **Your findings:**
 
-**Hotel type:** _____
+**Hotel type:** Resort Hotel
 
-**Arrival year:** _____
+**Arrival year:** 2017
 
-**Arrival month:** _____
+**Arrival month:** March
 
-**Number of adults:** _____
+**Number of adults:** 2
 
-**Number of children:** _____
+**Number of children:** 0
 
-**Number of babies:** _____
+**Number of babies:** 0
 
 **Why might this ADR be negative?**
 
-___________________________________________________________________________
+I would think that this is a data error. Another possibility is this was a complementary stay, but that doesnt account for it really. Perhaps it was an overpayment that wasn't returned. My money is on the data error.
 
 **Task 8.2:** Investigate the very high maximum ADR.
 
 First, determine what the maximum is from Exercise 7, then filter for it.
-```{r high-adr, eval = FALSE}
+```{r high-adr, eval = TRUE}
 # Filter for the maximum adr you found in Exercise 7
 hotels %>%
-  filter(adr == ___) %>%                            # Use the max value you found
+  filter(adr == 5400) %>%                            # Use the max value you found
   select(hotel, adr, arrival_date_year, 
          arrival_date_month, adults, children, babies)
 ```
 
 **Your findings:**
 
-**Hotel type:** _____
+**Hotel type:** City Hotel
 
-**Arrival year:** _____
+**Arrival year:** 2016
 
-**Arrival month:** _____
+**Arrival month:** March
 
-**Number of adults:** _____
+**Number of adults:** 2
 
-**Number of children:** _____
+**Number of children:** 0
 
-**Number of babies:** _____
+**Number of babies:** 0
 
 **Why might this ADR be so high? Is this realistic?**
 
-___________________________________________________________________________
-___________________________________________________________________________
+Unless this booking was for the penthouse for a long period, which we don't know by ehat we have looked at, this is also probably a data error.
 
 **Task 8.3:** Should these unusual values be removed from the dataset? Why or why not?
 
 **Your answer:**
 
-___________________________________________________________________________
-___________________________________________________________________________
-___________________________________________________________________________
+They are definitly outliers. Yes, they probably are errors and should be cleaned from the dataset.They are probably throwing off other stats.
 
 ---
 
